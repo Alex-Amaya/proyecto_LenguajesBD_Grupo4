@@ -1,3 +1,3 @@
 <?php
 require 'register.php';
-echo(userRegistry("juan@gmail.com", "123456","juan@gmail.com" ));
+echo(userRegistry("tania@gmail.com", "123456","tania@gmail.com" ));

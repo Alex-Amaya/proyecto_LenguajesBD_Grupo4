@@ -3,37 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="path/to/your/styles.css"> <!-- Asegúrate de agregar tu archivo CSS aquí -->
+    <title>Loginn</title>
+    <link rel="stylesheet" href="/estilos/login.css"> 
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <!-- Formulario de Login -->
-        <h2>Iniciar sesión</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="email">Correo electrónico:</label>
-                <input type="email" id="email" name="email" class="form-control" required>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md p-8 space-y-6 bg-white bg-opacity-80 shadow-lg rounded-xl">
+        <h2 class="text-2xl font-bold text-center text-gray-700">Inicio sesión</h2>
+        <form id="loginForm" method="POST" class="space-y-4">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-600">Correo Electrónico</label>
+                <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
             </div>
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" class="form-control" required>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-600">Contraseña</label>
+                <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
             </div>
-            <div id="login-error" style="color: red; display: none;"></div>
-            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+            <button type="submit" class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600">Iniciar sesión</button>
         </form>
-
-        <!-- Botones de autenticación (login y logout) -->
-        <div id="auth-buttons" style="display: none;">
-            <button class="btn btn-outline-light">Registrarse</button>
-            <button class="btn btn-outline-light">Iniciar sesión</button>
-        </div>
-
-        <div id="logout-buttons" style="display: none;">
-            <button class="btn btn-outline-light">Cerrar sesión</button>
-        </div>
+        <p class="text-sm text-center text-gray-600">¿No tienes una cuenta? <a href="register.html" class="text-blue-500 hover:underline">Registrate</a></p>
     </div>
-
-    <script src="path/to/your/javascript.js"></script> <!-- Asegúrate de agregar tu archivo JS aquí -->
 </body>
 </html>

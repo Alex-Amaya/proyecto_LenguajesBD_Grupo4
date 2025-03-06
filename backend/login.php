@@ -1,27 +1,29 @@
 <?php
 session_start();
 
-$role = isset($_SESSION['role']) ? $_SESSION['role'] : null; 
 require 'db.php';
 
-function login($username, $password){
-    try{
+function login($email, $password) {
+    try {
         global $pdo;
-        $sql = "SELECT * FROM usuarios where email = :email";
-        $stmt = $pdo -> prepare($sql);
-        $stmt -> execute(['email' => $username]);
-        //$user va a ser un arreglo asociativo con los datos de usuario;
-        $user = $stmt -> fetch(PDO::FETCH_ASSOC);
-        if($user){
-            if(password_verify($password, $user['password'])){
+        $sql = "SELECT * FROM usuarios WHERE email = :email";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['email' => $email]);
+        
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+
+        if ($user) {
+
+            if (password_verify($password, $user['password'])) {
+
                 $_SESSION['user_id'] = $user["id"];
-                $_SESSION['role'] = $user['role'];  // guardar el rol en la session 
                 return true;
             }
         }
         return false;
-    }catch(Exception $e){
-        logError($e -> getMessage());
+    } catch (Exception $e) {
+        logError($e->getMessage()); 
         return false;
     }
 }

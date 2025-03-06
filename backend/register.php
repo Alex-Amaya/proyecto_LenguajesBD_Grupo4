@@ -8,8 +8,8 @@ function userRegistry($username, $password, $email)
         // Hashear la contraseña
         $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
 
-        // Insertar usuario con rol por defecto 'client' sin el ID (usando la secuencia para el ID)
-        $sql = "INSERT INTO usuarios (ID, username, password, email) 
+        
+        $sql = "INSERT INTO usuarios (id, username, password, email) 
                 VALUES (usuarios_seq.NEXTVAL, :username, :password, :email)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
