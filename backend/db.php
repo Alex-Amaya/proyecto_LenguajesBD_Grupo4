@@ -10,8 +10,8 @@ try {
 
     $pdo = new PDO("oci:dbname=//$host:$port/$service_name", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conexión exitosa";
+
 } catch (PDOException $e) {
-    echo "Error de conexión: " . $e->getMessage();
+    echo json_encode(["error" => "Error de conexión: " . $e->getMessage()]);
 }
 

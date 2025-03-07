@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         try {
-            // Enviar la solicitud al servidor
+            
             const response = await fetch('backend/login.php', {
                 method: 'POST',
                 headers: {
@@ -28,9 +28,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await response.json();
 
             if (response.ok) {
-                // Login exitoso
+                
                 localStorage.setItem('userLoggedIn', 'true');
-                window.location.href ='/Proyecto_Grupo4/inicio.html';  // CAMBIAR SEGUN USUARIO 
+                window.location.href ='inicio.html';
             } else {
                 loginError.style.display = 'block';
                 loginError.textContent = result.error || 'Usuario o contraseña incorrectos.';
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const authButtons = document.getElementById('auth-buttons');
 
     if (logoutButtons && authButtons) {
-        // Verificar si el usuario está logueado
+       
         if (localStorage.getItem('userLoggedIn') === 'true') {
             logoutButtons.style.display = 'block';
             authButtons.querySelectorAll('.btn-outline-light, .btn-register').forEach(button => {

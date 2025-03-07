@@ -3,31 +3,26 @@ session_start();
 
 require 'db.php';
 
-function login($email, $password) {
-    try {
+function login($username, $password){
+    try{
         global $pdo;
-        $sql = "SELECT * FROM usuarios WHERE email = :email";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(['email' => $email]);
-        
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+        $sql = "SELECT * FROM usuarios where email = :email";
+        $stmt = $pdo -> prepare($sql);
+        $stmt -> execute(['email' => $username]);
 
-        if ($user) {
-
-            if (password_verify($password, $user['password'])) {
-
-                $_SESSION['user_id'] = $user["id"];
+        $user = $stmt -> fetch(PDO::FETCH_ASSOC);
+        if($user){
+            if(password_verify($password, $user['PASSWORD'])){
+                $_SESSION['user_id'] = $user["ID"];
                 return true;
             }
         }
         return false;
-    } catch (Exception $e) {
-        logError($e->getMessage()); 
+    }catch(Exception $e){
+        logError($e -> getMessage());
         return false;
     }
 }
-
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -52,3 +47,4 @@ if($method == 'POST'){
     http_response_code(405);
     echo json_encode(["error"=> "Metodo no permitido"]);
 }
+
