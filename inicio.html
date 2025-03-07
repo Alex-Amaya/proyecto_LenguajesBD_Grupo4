@@ -1,39 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Inicio</title>
-    <link rel="stylesheet" href="path/to/your/styles.css"> <!-- Vincula tu archivo CSS aquí -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pantalla de Inicio</title>
+  <link rel="stylesheet" href="/estilos/inicio.css"> 
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <!-- Barra de navegación -->
-    <nav>
-        <div class="navbar">
-            <a href="index.html" class="logo">Mi Página Web</a>
-            <ul class="nav-links">
-                <li><a href="login.html">Iniciar sesión</a></li>
-                <li><a href="about.html">Acerca de</a></li>
-                <li><a href="contact.html">Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
+<body class="bg-gray-100">
+    <nav class="bg-[#242424] p-4">
 
-    <!-- Área de bienvenida -->
-    <section id="welcome">
-        <div class="container">
-            <h1>Bienvenido a nuestra página</h1>
-            <p>Estamos encantados de que estés aquí. Explora nuestros servicios y obtén más información sobre lo que ofrecemos.</p>
-            <a href="services.html" class="btn btn-primary">Ver servicios</a>
-        </div>
-    </section>
+    <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+      <div class="text-white text-xl font-bold">
+        <a>Vitafuerte</a>
+      </div>
+      <div class="space-x-4">
+        <a href="/registrar-miembro" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Registrar Miembro</a>
+        <a href="/registrar-entrenador" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Registrar Entrenador</a>
+        <a href="/registrar-clase" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Registrar Clase</a>
+        <a href="/registrar-producto" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Registrar Producto</a>
+        <a href="/backend/logout.php" class="text-[#a1ef00] hover:bg-white hover:text-[#a1ef00] px-4 py-2 rounded-md transition">Logout</a>
+    </div>    
+    </div>
+  </nav>
 
-    <!-- Pie de página -->
-    <footer>
-        <div class="footer-container">
-            <p>&copy; 2025 Mi Página Web. Todos los derechos reservados.</p>
+  <div class="min-h-screen flex items-center justify-center p-6">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl flex space-x-8">
+      <!-- Imagen y texto -->
+      <div class="flex items-center p-4 border rounded-lg">
+        <img src="/fondos/inicio.jpg" alt="Descripción de la imagen" class="w-2/4 h-auto mr-4">
+        <div>
+          <h2 class="text-xl font-semibold p-8">Bienvenido al sistema de Vitafuerte
+          </h2>
+          <p class="text-gray-600 p-8" >Este es el centro donde gestionamos todo lo relacionado con nuestros miembros, clases y servicios. Asegúrate de mantener los datos actualizados y brindar un excelente servicio a cada uno de nuestros usuarios. Si necesitas asistencia, no dudes en consultar las guías del sistema o comunicarte con el equipo de soporte.
+
+            Recuerda, la misión de Vitafuerte es ofrecer un ambiente de bienestar y superación personal, y tu rol es clave para lograrlo. ¡Gracias por ser parte de este gran equipo!</p>
         </div>
-    </footer>
+      <!-- Espacio para más contenido o funcionalidades -->
+      <div class="flex-1">
+        <!-- Aquí puedes agregar más contenido si es necesario -->
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
