@@ -6,7 +6,7 @@ require 'db.php';
 function login($username, $password){
     try{
         global $pdo;
-        $sql = "SELECT * FROM usuarios where email = :email";
+        $sql = "SELECT * FROM empleados where email = :email";
         $stmt = $pdo -> prepare($sql);
         $stmt -> execute(['email' => $username]);
 
