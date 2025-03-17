@@ -1,6 +1,7 @@
 <?php
 require 'db.php';
 
+
 function userRegistry($cedula, $nombre, $apellido, $correo, $telefono, $direccion, $fecha_registro)
 {
     try {
@@ -26,7 +27,7 @@ function userRegistry($cedula, $nombre, $apellido, $correo, $telefono, $direccio
     }
 }
 
-function getClientByCedula($cedula)
+function getUserByCedula($cedula)
 {
     try {
         global $pdo;
@@ -34,13 +35,51 @@ function getClientByCedula($cedula)
         $sql = "SELECT * FROM usuarios WHERE cedula = :cedula";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['cedula' => $cedula]);
-        $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($cliente) {
-            return $cliente;
-        } else {
-            return false; 
-        }
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+
+    } catch (Exception $e) {
+        return null;
+    }
+}
+
+function updateUser($cedula, $nombre, $apellido, $correo, $telefono, $direccion, $fecha_registro)
+{
+    try {
+        global $pdo;
+
+        $sql = "UPDATE usuarios 
+                SET nombre = :nombre, apellido = :apellido, correo = :correo, telefono = :telefono, direccion = :direccion, fecha_registro = TO_DATE(:fecha_registro, 'YYYY-MM-DD')
+                WHERE cedula = :cedula";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'cedula' => $cedula,
+            'nombre' => $nombre,
+            'apellido' => $apellido,
+            'correo' => $correo,
+            'telefono' => $telefono,
+            'direccion' => $direccion,
+            'fecha_registro' => $fecha_registro
+        ]);
+
+        return true;
+
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
+function deleteUserByCedula($cedula)
+{
+    try {
+        global $pdo;
+
+        $sql = "DELETE FROM usuarios WHERE cedula = :cedula";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['cedula' => $cedula]);
+
+        return $stmt->rowCount() > 0;
+
     } catch (Exception $e) {
         return false;
     }
@@ -51,19 +90,16 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
 
     case 'GET':
-
         if (isset($_GET['cedula'])) {
             $cedula = $_GET['cedula'];
+            $user = getUserByCedula($cedula);
 
-            $cliente = getClientByCedula($cedula);
-
-            if ($cliente) {
-                echo json_encode(['success' => true, 'cliente' => $cliente]);
+            if ($user) {
+                echo json_encode($user);
             } else {
-                echo json_encode(['error' => 'Cliente no encontrado']);
+                http_response_code(404);
+                echo json_encode(["error" => "Usuario no encontrado"]);
             }
-        } else {
-            echo json_encode(['error' => 'Cédula requerida']);
         }
         break;
 
@@ -92,7 +128,51 @@ switch ($method) {
             echo json_encode(["error" => "Todos los campos son requeridos"]);
         }
 
+        break;
+
+    case 'PUT':
+            $data = json_decode(file_get_contents('php://input'), true);
+    
+            if (isset($data['cedula']) && isset($data['nombre']) && isset($data['apellido']) && isset($data['correo']) && isset($data['telefono']) && isset($data['direccion']) && isset($data['fecha_registro'])) {
+                $cedula = $data['cedula'];
+                $nombre = $data['nombre'];
+                $apellido = $data['apellido'];
+                $correo = $data['correo'];
+                $telefono = $data['telefono'];
+                $direccion = $data['direccion'];
+                $fecha_registro = $data['fecha_registro'];
+    
+                if (updateUser($cedula, $nombre, $apellido, $correo, $telefono, $direccion, $fecha_registro)) {
+                    echo json_encode(["success" => "Usuario actualizado exitosamente"]);
+                } else {
+                    http_response_code(500);
+                    echo json_encode(["error" => "Error actualizando el usuario"]);
+                }
+            } else {
+                http_response_code(400);
+                echo json_encode(["error" => "Todos los campos son requeridos"]);
+            }
+            break;
+
+
+    case 'DELETE':
+                $data = json_decode(file_get_contents('php://input'), true);
+        
+                if (isset($data['cedula'])) {
+                    $cedula = $data['cedula'];
+        
+                    if (deleteUserByCedula($cedula)) {
+                        echo json_encode(["success" => "Usuario eliminado exitosamente"]);
+                    } else {
+                        http_response_code(500);
+                        echo json_encode(["error" => "Error eliminando el usuario"]);
+                    }
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["error" => "Cédula no proporcionada"]);
+                }
+                break;
 }
 
 
-?>
+
