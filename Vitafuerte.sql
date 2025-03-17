@@ -141,6 +141,16 @@ START WITH 1
 INCREMENT BY 1;
 
 
+CREATE TABLE instructores_clases (
+    id_instructor INT,
+    id_clase INT,
+    PRIMARY KEY (id_instructor, id_clase),
+    CONSTRAINT fk_instructor FOREIGN KEY (id_instructor) REFERENCES instructores(id_instructor),
+    CONSTRAINT fk_clase FOREIGN KEY (id_clase) REFERENCES clases(id_clase)
+);
+
+
+
 /*Inserciones en la base*/
 
 INSERT INTO usuarios (id_usuario, cedula, nombre, apellido, correo, telefono, direccion, fecha_registro)
