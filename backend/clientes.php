@@ -37,6 +37,7 @@ function getUserByCedula($cedula)
         $stmt->execute(['cedula' => $cedula]);
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
+        
 
     } catch (Exception $e) {
         return null;
