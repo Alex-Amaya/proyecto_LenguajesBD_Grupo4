@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Ventas</title>
+    <link rel="stylesheet" href="/estilos/ventas.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="ventas.js" defer></script>
+</head>
+
+<body class="bg-gray-100">
+    <nav class="bg-[#242424] p-4">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center">
+            <div class="text-white text-xl font-bold">
+                <a>Vitafuerte</a>
+            </div>
+            <div class="space-x-4">
+                <a href="/clientes.html" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Clientes</a>
+                <a href="/membresias.html" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Membresias</a>
+                <a href="" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Entrenadores</a>
+                <a href="" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Clases</a>
+                <a href="" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Productos</a>
+                <a href="" class="text-white hover:bg-blue-500 px-4 py-2 rounded-md transition">Equipos</a>
+                <a href="/backend/logout.php" class="text-[#a1ef00] hover:bg-white hover:text-[#242424] px-4 py-2 rounded-md transition">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold mb-6 text-center">Registrar Venta</h2>
+        <form id="ventaForm" class="space-y-4">
+
+            <div>
+                <label for="ID_USUARIO" class="block text-gray-700">ID Usuario:</label>
+                <input type="number" id="ID_USUARIO" name="ID_USUARIO" class="w-full p-2 border rounded-md">
+            </div>
+
+            <div>
+                <label for="ID_PRODUCTO" class="block text-gray-700">ID Producto:</label>
+                <input type="number" id="ID_PRODUCTO" name="ID_PRODUCTO" class="w-full p-2 border rounded-md">
+            </div>
+
+            <div>
+                <label for="CANTIDAD" class="block text-gray-700">Cantidad:</label>
+                <input type="number" id="CANTIDAD" name="CANTIDAD" class="w-full p-2 border rounded-md">
+            </div>
+
+            <div>
+                <label for="TOTAL" class="block text-gray-700">Total:</label>
+                <input type="number" id="TOTAL" name="TOTAL" step="0.01" required class="w-full p-2 border rounded-md">
+            </div>
+
+            <div>
+                <label for="FECHA_VENTA" class="block text-gray-700">Fecha de Venta:</label>
+                <input type="date" id="FECHA_VENTA" name="FECHA_VENTA" required class="w-full p-2 border rounded-md">
+            </div>
+
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition">
+                Registrar Venta
+            </button>
+        </form>
+    </div>
+
+</body>
+
+</html>
